@@ -3,23 +3,89 @@
 
 ## Table of Contents
 
-- [npool/service-sample.proto](#npool/service-sample.proto)
-    - [VersionResponse](#service.sample.v1.VersionResponse)
+- [npool/s3-management.proto](#npool/s3-management.proto)
+    - [GetImgFromS3Request](#s3.management.v1.GetImgFromS3Request)
+    - [GetImgFromS3Response](#s3.management.v1.GetImgFromS3Response)
+    - [UploadImgToS3Request](#s3.management.v1.UploadImgToS3Request)
+    - [UploadImgToS3Response](#s3.management.v1.UploadImgToS3Response)
+    - [VersionResponse](#s3.management.v1.VersionResponse)
   
-    - [ServiceExample](#service.sample.v1.ServiceExample)
+    - [S3Management](#s3.management.v1.S3Management)
   
 - [Scalar Value Types](#scalar-value-types)
 
 
 
-<a name="npool/service-sample.proto"></a>
+<a name="npool/s3-management.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## npool/service-sample.proto
+## npool/s3-management.proto
 
 
 
-<a name="service.sample.v1.VersionResponse"></a>
+<a name="s3.management.v1.GetImgFromS3Request"></a>
+
+### GetImgFromS3Request
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| ImgID | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="s3.management.v1.GetImgFromS3Response"></a>
+
+### GetImgFromS3Response
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| Info | [string](#string) |  | return ImgBase64 |
+
+
+
+
+
+
+<a name="s3.management.v1.UploadImgToS3Request"></a>
+
+### UploadImgToS3Request
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| UserID | [string](#string) |  |  |
+| ImgType | [string](#string) |  |  |
+| ImgBase64 | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="s3.management.v1.UploadImgToS3Response"></a>
+
+### UploadImgToS3Response
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| Info | [string](#string) |  | return ImgID |
+
+
+
+
+
+
+<a name="s3.management.v1.VersionResponse"></a>
 
 ### VersionResponse
 request body and response
@@ -40,14 +106,16 @@ request body and response
  
 
 
-<a name="service.sample.v1.ServiceExample"></a>
+<a name="s3.management.v1.S3Management"></a>
 
-### ServiceExample
+### S3Management
 Service Name
 
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
-| Version | [.google.protobuf.Empty](#google.protobuf.Empty) | [VersionResponse](#service.sample.v1.VersionResponse) | Method Version |
+| Version | [.google.protobuf.Empty](#google.protobuf.Empty) | [VersionResponse](#s3.management.v1.VersionResponse) | Method Version |
+| UploadImgToS3 | [UploadImgToS3Request](#s3.management.v1.UploadImgToS3Request) | [UploadImgToS3Response](#s3.management.v1.UploadImgToS3Response) |  |
+| GetImgFromS3 | [GetImgFromS3Request](#s3.management.v1.GetImgFromS3Request) | [GetImgFromS3Response](#s3.management.v1.GetImgFromS3Response) |  |
 
  
 
