@@ -80,7 +80,12 @@ pipeline {
 
             cd .apollo-base-config
             ./apollo-base-config.sh $APP_ID $TARGET_ENV $vhost
-            ./apollo-item-config.sh $APP_ID $TARGET_ENV $vhost database_name service_sample s3_access_key $S3_ACCESSKEY s3_secret_key $S3_SECRET_KEY s3_endpoint $S3_ENDPOINT s3_region $S3_REGION s3_bucket $S3_BUCKET
+            ./apollo-item-config.sh $APP_ID $TARGET_ENV $vhost database_name service_sample
+            ./apollo-item-config.sh $APP_ID $TARGET_ENV $vhost s3_access_key $S3_ACCESSKEY
+            ./apollo-item-config.sh $APP_ID $TARGET_ENV $vhost s3_secret_key $S3_SECRET_KEY
+            ./apollo-item-config.sh $APP_ID $TARGET_ENV $vhost s3_endpoint $S3_ENDPOINT
+            ./apollo-item-config.sh $APP_ID $TARGET_ENV $vhost s3_region $S3_REGION
+            ./apollo-item-config.sh $APP_ID $TARGET_ENV $vhost s3_bucket $S3_BUCKET
             cd -
           done
 
@@ -134,7 +139,12 @@ pipeline {
             kubectl exec -it --namespace kube-system rabbitmq-0 -- rabbitmqctl set_permissions -p $vhost $username ".*" ".*" ".*"
             cd .apollo-base-config
             ./apollo-base-config.sh $APP_ID $TARGET_ENV $vhost
-            ./apollo-item-config.sh $APP_ID $TARGET_ENV $vhost database_name service_sample s3_access_key $S3_ACCESSKEY s3_secret_key $S3_SECRET_KEY s3_endpoint $S3_ENDPOINT s3_region $S3_REGION s3_bucket $S3_BUCKET
+            ./apollo-item-config.sh $APP_ID $TARGET_ENV $vhost database_name service_sample
+            ./apollo-item-config.sh $APP_ID $TARGET_ENV $vhost s3_access_key $S3_ACCESSKEY
+            ./apollo-item-config.sh $APP_ID $TARGET_ENV $vhost s3_secret_key $S3_SECRET_KEY
+            ./apollo-item-config.sh $APP_ID $TARGET_ENV $vhost s3_endpoint $S3_ENDPOINT
+            ./apollo-item-config.sh $APP_ID $TARGET_ENV $vhost s3_region $S3_REGION
+            ./apollo-item-config.sh $APP_ID $TARGET_ENV $vhost s3_bucket $S3_BUCKET
           done
         '''.stripIndent())
       }
