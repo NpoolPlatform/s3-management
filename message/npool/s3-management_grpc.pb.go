@@ -21,8 +21,8 @@ const _ = grpc.SupportPackageIsVersion7
 type S3ManagementClient interface {
 	// Method Version
 	Version(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*VersionResponse, error)
-	UploadImgToS3(ctx context.Context, in *UploadImgToS3Request, opts ...grpc.CallOption) (*UploadImgToS3Response, error)
-	GetImgFromS3(ctx context.Context, in *GetImgFromS3Request, opts ...grpc.CallOption) (*GetImgFromS3Response, error)
+	UploadKycImg(ctx context.Context, in *UploadKycImgRequest, opts ...grpc.CallOption) (*UploadKycImgResponse, error)
+	GetKycImg(ctx context.Context, in *GetKycImgRequest, opts ...grpc.CallOption) (*GetKycImgResponse, error)
 }
 
 type s3ManagementClient struct {
@@ -42,18 +42,18 @@ func (c *s3ManagementClient) Version(ctx context.Context, in *emptypb.Empty, opt
 	return out, nil
 }
 
-func (c *s3ManagementClient) UploadImgToS3(ctx context.Context, in *UploadImgToS3Request, opts ...grpc.CallOption) (*UploadImgToS3Response, error) {
-	out := new(UploadImgToS3Response)
-	err := c.cc.Invoke(ctx, "/s3.management.v1.S3Management/UploadImgToS3", in, out, opts...)
+func (c *s3ManagementClient) UploadKycImg(ctx context.Context, in *UploadKycImgRequest, opts ...grpc.CallOption) (*UploadKycImgResponse, error) {
+	out := new(UploadKycImgResponse)
+	err := c.cc.Invoke(ctx, "/s3.management.v1.S3Management/UploadKycImg", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *s3ManagementClient) GetImgFromS3(ctx context.Context, in *GetImgFromS3Request, opts ...grpc.CallOption) (*GetImgFromS3Response, error) {
-	out := new(GetImgFromS3Response)
-	err := c.cc.Invoke(ctx, "/s3.management.v1.S3Management/GetImgFromS3", in, out, opts...)
+func (c *s3ManagementClient) GetKycImg(ctx context.Context, in *GetKycImgRequest, opts ...grpc.CallOption) (*GetKycImgResponse, error) {
+	out := new(GetKycImgResponse)
+	err := c.cc.Invoke(ctx, "/s3.management.v1.S3Management/GetKycImg", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -66,8 +66,8 @@ func (c *s3ManagementClient) GetImgFromS3(ctx context.Context, in *GetImgFromS3R
 type S3ManagementServer interface {
 	// Method Version
 	Version(context.Context, *emptypb.Empty) (*VersionResponse, error)
-	UploadImgToS3(context.Context, *UploadImgToS3Request) (*UploadImgToS3Response, error)
-	GetImgFromS3(context.Context, *GetImgFromS3Request) (*GetImgFromS3Response, error)
+	UploadKycImg(context.Context, *UploadKycImgRequest) (*UploadKycImgResponse, error)
+	GetKycImg(context.Context, *GetKycImgRequest) (*GetKycImgResponse, error)
 	mustEmbedUnimplementedS3ManagementServer()
 }
 
@@ -78,11 +78,11 @@ type UnimplementedS3ManagementServer struct {
 func (UnimplementedS3ManagementServer) Version(context.Context, *emptypb.Empty) (*VersionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Version not implemented")
 }
-func (UnimplementedS3ManagementServer) UploadImgToS3(context.Context, *UploadImgToS3Request) (*UploadImgToS3Response, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UploadImgToS3 not implemented")
+func (UnimplementedS3ManagementServer) UploadKycImg(context.Context, *UploadKycImgRequest) (*UploadKycImgResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UploadKycImg not implemented")
 }
-func (UnimplementedS3ManagementServer) GetImgFromS3(context.Context, *GetImgFromS3Request) (*GetImgFromS3Response, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetImgFromS3 not implemented")
+func (UnimplementedS3ManagementServer) GetKycImg(context.Context, *GetKycImgRequest) (*GetKycImgResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetKycImg not implemented")
 }
 func (UnimplementedS3ManagementServer) mustEmbedUnimplementedS3ManagementServer() {}
 
@@ -115,38 +115,38 @@ func _S3Management_Version_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
-func _S3Management_UploadImgToS3_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UploadImgToS3Request)
+func _S3Management_UploadKycImg_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UploadKycImgRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(S3ManagementServer).UploadImgToS3(ctx, in)
+		return srv.(S3ManagementServer).UploadKycImg(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/s3.management.v1.S3Management/UploadImgToS3",
+		FullMethod: "/s3.management.v1.S3Management/UploadKycImg",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(S3ManagementServer).UploadImgToS3(ctx, req.(*UploadImgToS3Request))
+		return srv.(S3ManagementServer).UploadKycImg(ctx, req.(*UploadKycImgRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _S3Management_GetImgFromS3_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetImgFromS3Request)
+func _S3Management_GetKycImg_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetKycImgRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(S3ManagementServer).GetImgFromS3(ctx, in)
+		return srv.(S3ManagementServer).GetKycImg(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/s3.management.v1.S3Management/GetImgFromS3",
+		FullMethod: "/s3.management.v1.S3Management/GetKycImg",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(S3ManagementServer).GetImgFromS3(ctx, req.(*GetImgFromS3Request))
+		return srv.(S3ManagementServer).GetKycImg(ctx, req.(*GetKycImgRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -163,12 +163,12 @@ var S3Management_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _S3Management_Version_Handler,
 		},
 		{
-			MethodName: "UploadImgToS3",
-			Handler:    _S3Management_UploadImgToS3_Handler,
+			MethodName: "UploadKycImg",
+			Handler:    _S3Management_UploadKycImg_Handler,
 		},
 		{
-			MethodName: "GetImgFromS3",
-			Handler:    _S3Management_GetImgFromS3_Handler,
+			MethodName: "GetKycImg",
+			Handler:    _S3Management_GetKycImg_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -66,8 +66,8 @@ func local_request_S3Management_Version_0(ctx context.Context, marshaler runtime
 
 }
 
-func request_S3Management_UploadImgToS3_0(ctx context.Context, marshaler runtime.Marshaler, client S3ManagementClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq UploadImgToS3Request
+func request_S3Management_UploadKycImg_0(ctx context.Context, marshaler runtime.Marshaler, client S3ManagementClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq UploadKycImgRequest
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
@@ -78,13 +78,13 @@ func request_S3Management_UploadImgToS3_0(ctx context.Context, marshaler runtime
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
-	msg, err := client.UploadImgToS3(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	msg, err := client.UploadKycImg(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 
 }
 
-func local_request_S3Management_UploadImgToS3_0(ctx context.Context, marshaler runtime.Marshaler, server S3ManagementServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq UploadImgToS3Request
+func local_request_S3Management_UploadKycImg_0(ctx context.Context, marshaler runtime.Marshaler, server S3ManagementServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq UploadKycImgRequest
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
@@ -95,13 +95,13 @@ func local_request_S3Management_UploadImgToS3_0(ctx context.Context, marshaler r
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
-	msg, err := server.UploadImgToS3(ctx, &protoReq)
+	msg, err := server.UploadKycImg(ctx, &protoReq)
 	return msg, metadata, err
 
 }
 
-func request_S3Management_GetImgFromS3_0(ctx context.Context, marshaler runtime.Marshaler, client S3ManagementClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq GetImgFromS3Request
+func request_S3Management_GetKycImg_0(ctx context.Context, marshaler runtime.Marshaler, client S3ManagementClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq GetKycImgRequest
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
@@ -112,13 +112,13 @@ func request_S3Management_GetImgFromS3_0(ctx context.Context, marshaler runtime.
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
-	msg, err := client.GetImgFromS3(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	msg, err := client.GetKycImg(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 
 }
 
-func local_request_S3Management_GetImgFromS3_0(ctx context.Context, marshaler runtime.Marshaler, server S3ManagementServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq GetImgFromS3Request
+func local_request_S3Management_GetKycImg_0(ctx context.Context, marshaler runtime.Marshaler, server S3ManagementServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq GetKycImgRequest
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
@@ -129,7 +129,7 @@ func local_request_S3Management_GetImgFromS3_0(ctx context.Context, marshaler ru
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
-	msg, err := server.GetImgFromS3(ctx, &protoReq)
+	msg, err := server.GetKycImg(ctx, &protoReq)
 	return msg, metadata, err
 
 }
@@ -163,18 +163,18 @@ func RegisterS3ManagementHandlerServer(ctx context.Context, mux *runtime.ServeMu
 
 	})
 
-	mux.Handle("POST", pattern_S3Management_UploadImgToS3_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_S3Management_UploadKycImg_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/s3.management.v1.S3Management/UploadImgToS3", runtime.WithHTTPPathPattern("/v1/upload/img/to/s3"))
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/s3.management.v1.S3Management/UploadKycImg", runtime.WithHTTPPathPattern("/v1/upload/kyc/img"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_S3Management_UploadImgToS3_0(rctx, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_S3Management_UploadKycImg_0(rctx, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
@@ -182,22 +182,22 @@ func RegisterS3ManagementHandlerServer(ctx context.Context, mux *runtime.ServeMu
 			return
 		}
 
-		forward_S3Management_UploadImgToS3_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_S3Management_UploadKycImg_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("POST", pattern_S3Management_GetImgFromS3_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_S3Management_GetKycImg_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/s3.management.v1.S3Management/GetImgFromS3", runtime.WithHTTPPathPattern("/v1/get/img/from/s3"))
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/s3.management.v1.S3Management/GetKycImg", runtime.WithHTTPPathPattern("/v1/get/kyc/img"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_S3Management_GetImgFromS3_0(rctx, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_S3Management_GetKycImg_0(rctx, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
@@ -205,7 +205,7 @@ func RegisterS3ManagementHandlerServer(ctx context.Context, mux *runtime.ServeMu
 			return
 		}
 
-		forward_S3Management_GetImgFromS3_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_S3Management_GetKycImg_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -270,43 +270,43 @@ func RegisterS3ManagementHandlerClient(ctx context.Context, mux *runtime.ServeMu
 
 	})
 
-	mux.Handle("POST", pattern_S3Management_UploadImgToS3_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_S3Management_UploadKycImg_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/s3.management.v1.S3Management/UploadImgToS3", runtime.WithHTTPPathPattern("/v1/upload/img/to/s3"))
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/s3.management.v1.S3Management/UploadKycImg", runtime.WithHTTPPathPattern("/v1/upload/kyc/img"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_S3Management_UploadImgToS3_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_S3Management_UploadKycImg_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_S3Management_UploadImgToS3_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_S3Management_UploadKycImg_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("POST", pattern_S3Management_GetImgFromS3_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_S3Management_GetKycImg_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/s3.management.v1.S3Management/GetImgFromS3", runtime.WithHTTPPathPattern("/v1/get/img/from/s3"))
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/s3.management.v1.S3Management/GetKycImg", runtime.WithHTTPPathPattern("/v1/get/kyc/img"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_S3Management_GetImgFromS3_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_S3Management_GetKycImg_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_S3Management_GetImgFromS3_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_S3Management_GetKycImg_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -316,15 +316,15 @@ func RegisterS3ManagementHandlerClient(ctx context.Context, mux *runtime.ServeMu
 var (
 	pattern_S3Management_Version_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0}, []string{"version"}, ""))
 
-	pattern_S3Management_UploadImgToS3_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 2, 4}, []string{"v1", "upload", "img", "to", "s3"}, ""))
+	pattern_S3Management_UploadKycImg_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"v1", "upload", "kyc", "img"}, ""))
 
-	pattern_S3Management_GetImgFromS3_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 2, 4}, []string{"v1", "get", "img", "from", "s3"}, ""))
+	pattern_S3Management_GetKycImg_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"v1", "get", "kyc", "img"}, ""))
 )
 
 var (
 	forward_S3Management_Version_0 = runtime.ForwardResponseMessage
 
-	forward_S3Management_UploadImgToS3_0 = runtime.ForwardResponseMessage
+	forward_S3Management_UploadKycImg_0 = runtime.ForwardResponseMessage
 
-	forward_S3Management_GetImgFromS3_0 = runtime.ForwardResponseMessage
+	forward_S3Management_GetKycImg_0 = runtime.ForwardResponseMessage
 )

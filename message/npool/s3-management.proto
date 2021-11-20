@@ -16,15 +16,15 @@ service S3Management {
             body: "*"
         };
     }
-    rpc UploadImgToS3 (UploadImgToS3Request) returns (UploadImgToS3Response) {
+    rpc UploadKycImg (UploadKycImgRequest) returns (UploadKycImgResponse) {
         option (google.api.http) = {
-            post: "/v1/upload/img/to/s3"
+            post: "/v1/upload/kyc/img"
             body: "*"
         };
     };
-    rpc GetImgFromS3 (GetImgFromS3Request) returns (GetImgFromS3Response) {
+    rpc GetKycImg (GetKycImgRequest) returns (GetKycImgResponse) {
         option (google.api.http) = {
-            post: "/v1/get/img/from/s3"
+            post: "/v1/get/kyc/img"
             body: "*"
         };
     };
@@ -35,22 +35,22 @@ message VersionResponse {
     string Info = 100;
 }
 
-message UploadImgToS3Request {
+message UploadKycImgRequest {
     string UserID = 1;
     string ImgType = 2;
     string ImgBase64 = 3;
 }
 
-message UploadImgToS3Response {
+message UploadKycImgResponse {
     // return ImgID
     string Info = 1;
 }
 
-message GetImgFromS3Request {
+message GetKycImgRequest {
     string ImgID = 2;
 }
 
-message GetImgFromS3Response {
+message GetKycImgResponse {
     // return ImgBase64
     string Info = 1;
 }

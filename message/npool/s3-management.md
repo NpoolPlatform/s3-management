@@ -4,10 +4,10 @@
 ## Table of Contents
 
 - [npool/s3-management.proto](#npool/s3-management.proto)
-    - [GetImgFromS3Request](#s3.management.v1.GetImgFromS3Request)
-    - [GetImgFromS3Response](#s3.management.v1.GetImgFromS3Response)
-    - [UploadImgToS3Request](#s3.management.v1.UploadImgToS3Request)
-    - [UploadImgToS3Response](#s3.management.v1.UploadImgToS3Response)
+    - [GetKycImgRequest](#s3.management.v1.GetKycImgRequest)
+    - [GetKycImgResponse](#s3.management.v1.GetKycImgResponse)
+    - [UploadKycImgRequest](#s3.management.v1.UploadKycImgRequest)
+    - [UploadKycImgResponse](#s3.management.v1.UploadKycImgResponse)
     - [VersionResponse](#s3.management.v1.VersionResponse)
   
     - [S3Management](#s3.management.v1.S3Management)
@@ -23,9 +23,9 @@
 
 
 
-<a name="s3.management.v1.GetImgFromS3Request"></a>
+<a name="s3.management.v1.GetKycImgRequest"></a>
 
-### GetImgFromS3Request
+### GetKycImgRequest
 
 
 
@@ -38,9 +38,9 @@
 
 
 
-<a name="s3.management.v1.GetImgFromS3Response"></a>
+<a name="s3.management.v1.GetKycImgResponse"></a>
 
-### GetImgFromS3Response
+### GetKycImgResponse
 
 
 
@@ -53,9 +53,9 @@
 
 
 
-<a name="s3.management.v1.UploadImgToS3Request"></a>
+<a name="s3.management.v1.UploadKycImgRequest"></a>
 
-### UploadImgToS3Request
+### UploadKycImgRequest
 
 
 
@@ -70,9 +70,9 @@
 
 
 
-<a name="s3.management.v1.UploadImgToS3Response"></a>
+<a name="s3.management.v1.UploadKycImgResponse"></a>
 
-### UploadImgToS3Response
+### UploadKycImgResponse
 
 
 
@@ -114,8 +114,8 @@ Service Name
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
 | Version | [.google.protobuf.Empty](#google.protobuf.Empty) | [VersionResponse](#s3.management.v1.VersionResponse) | Method Version |
-| UploadImgToS3 | [UploadImgToS3Request](#s3.management.v1.UploadImgToS3Request) | [UploadImgToS3Response](#s3.management.v1.UploadImgToS3Response) |  |
-| GetImgFromS3 | [GetImgFromS3Request](#s3.management.v1.GetImgFromS3Request) | [GetImgFromS3Response](#s3.management.v1.GetImgFromS3Response) |  |
+| UploadKycImg | [UploadKycImgRequest](#s3.management.v1.UploadKycImgRequest) | [UploadKycImgResponse](#s3.management.v1.UploadKycImgResponse) |  |
+| GetKycImg | [GetKycImgRequest](#s3.management.v1.GetKycImgRequest) | [GetKycImgResponse](#s3.management.v1.GetKycImgResponse) |  |
 
  
 

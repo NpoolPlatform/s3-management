@@ -26,28 +26,28 @@ func TestS3API(t *testing.T) { // nolint
 
 	resp, err := cli.R().
 		SetHeader("Content-Type", "application/json").
-		SetBody(npool.UploadImgToS3Request{
+		SetBody(npool.UploadKycImgRequest{
 			UserID:    userID,
 			ImgType:   imgType,
 			ImgBase64: imgBase64,
-		}).Post("http://localhost:32759/v1/upload/img/to/s3")
+		}).Post("http://localhost:32759/v1/upload/kyc/img")
 	if assert.Nil(t, err) {
 		assert.Equal(t, 200, resp.StatusCode())
-		resposne := npool.UploadImgToS3Response{}
+		resposne := npool.UploadKycImgResponse{}
 		err := json.Unmarshal(resp.Body(), &resposne)
 		if assert.Nil(t, err) {
-			assert.Equal(t, resposne.Info, imgID)
+			assert.Equal(t, resposne.Info, "kyc/"+imgID)
 		}
 	}
 
 	resp1, err := cli.R().
 		SetHeader("Content-Type", "application/json").
-		SetBody(npool.GetImgFromS3Request{
+		SetBody(npool.GetKycImgRequest{
 			ImgID: imgID,
-		}).Post("http://localhost:32759/v1/get/img/from/s3")
+		}).Post("http://localhost:32759/v1/get/kyc/img")
 	if assert.Nil(t, err) {
 		assert.Equal(t, 200, resp1.StatusCode())
-		response := npool.GetImgFromS3Response{}
+		response := npool.GetKycImgResponse{}
 		err := json.Unmarshal(resp1.Body(), &response)
 		if assert.Nil(t, err) {
 			assert.Equal(t, response.Info, imgBase64)

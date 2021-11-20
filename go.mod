@@ -4,8 +4,7 @@ go 1.16
 
 require (
 	entgo.io/ent v0.9.1
-	github.com/NpoolPlatform/go-service-framework v0.0.0-20211102122901-b687a4bf9b14
-	github.com/aws/aws-sdk-go v1.42.4
+	github.com/NpoolPlatform/go-service-framework v0.0.0-20211119115808-35513fcc0b81
 	github.com/go-resty/resty/v2 v2.7.0
 	github.com/google/uuid v1.3.0
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.6.0

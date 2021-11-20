@@ -1,4 +1,4 @@
-package s3
+package store
 
 import (
 	"context"
@@ -32,19 +32,21 @@ func TestS3(t *testing.T) { // nolint
 	imgBase64 := "iVBORw0KGgoAAAANSUhEUgAAAB4AAAAZCAYAAAAmNZ4aAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAySURBVEhL7c2hAQAgDMTAp/vv3CI6QxDkTGROX3mgtjjHGMcYxxjHGMcYxxjHmN/GyQBA0AQuiLmS2gAAAABJRU5ErkJggg=="
 	imgID := imgType + userID
 
-	resp, err := UploadImgToS3(context.Background(), &npool.UploadImgToS3Request{
+	resp, err := UploadKycImg(context.Background(), &npool.UploadKycImgRequest{
 		UserID:    userID,
 		ImgType:   imgType,
 		ImgBase64: imgBase64,
 	})
 	if assert.Nil(t, err) {
-		assert.Equal(t, imgID, resp.Info)
+		assert.NotNil(t, resp)
+		assert.Equal(t, "kyc/"+imgID, resp.Info)
 	}
 
-	resp1, err := GetImgFromS3(context.Background(), &npool.GetImgFromS3Request{
-		ImgID: imgID,
+	resp1, err := GetKycImg(context.Background(), &npool.GetKycImgRequest{
+		ImgID: resp.Info,
 	})
 	if assert.Nil(t, err) {
+		assert.NotNil(t, resp1)
 		assert.Equal(t, imgBase64, resp1.Info)
 	}
 }

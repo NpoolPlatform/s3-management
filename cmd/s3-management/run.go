@@ -8,22 +8,33 @@ import (
 	msglistener "github.com/NpoolPlatform/s3-management/pkg/message/listener"
 	msg "github.com/NpoolPlatform/s3-management/pkg/message/message"
 	msgsrv "github.com/NpoolPlatform/s3-management/pkg/message/server"
+	"golang.org/x/xerrors"
 
 	grpc2 "github.com/NpoolPlatform/go-service-framework/pkg/grpc"
 	"github.com/NpoolPlatform/go-service-framework/pkg/logger"
+	"github.com/NpoolPlatform/go-service-framework/pkg/oss"
 
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
+
+	ossconst "github.com/NpoolPlatform/go-service-framework/pkg/oss/const"
 
 	cli "github.com/urfave/cli/v2"
 
 	"google.golang.org/grpc"
 )
 
+const BucketKey = "kyc-bucket"
+
 var runCmd = &cli.Command{
 	Name:    "run",
 	Aliases: []string{"s"},
 	Usage:   "Run the daemon",
 	Action: func(c *cli.Context) error {
+		err := oss.Init(ossconst.SecretStoreKey, BucketKey)
+		if err != nil {
+			return xerrors.Errorf("fail to init s3: %v", err)
+		}
+
 		go func() {
 			if err := grpc2.RunGRPC(rpcRegister); err != nil {
 				logger.Sugar().Errorf("fail to run grpc server: %v", err)
